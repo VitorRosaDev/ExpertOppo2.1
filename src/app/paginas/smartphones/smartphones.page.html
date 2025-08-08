@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title>SMARTPHONES</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="termoBusca" (ionInput)="onSearchChange()" placeholder="Buscar smartphone"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="segmentoSelecionado" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="linha-a">
+      <ion-label>Linha A</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="linha-reno">
+      <ion-label>Reno</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="smartphonesFiltrados.length > 0; else noResults">
+    <ion-card class="custom-card" *ngFor="let smartphone of smartphonesFiltrados">
+      <ion-card-header>
+        <ion-card-title class="card-title">{{ smartphone.nome }}</ion-card-title>
+        <img [src]="smartphone.imagem" [alt]="'Oppo ' + smartphone.nome" class="card-title">
+        <ion-card-subtitle>{{ smartphone.subtitulo }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <strong>Diferencial:</strong> {{ smartphone.diferencial }}<br>
+        <strong>Câmeras:</strong> {{ smartphone.cameras }}<br>
+        <strong>Carregador:</strong> {{ smartphone.carregador }}<br>
+        <strong>Bateria:</strong> {{ smartphone.bateria }}<br>
+        <strong>Processador:</strong> {{ smartphone.processador }}<br>
+
+        <ion-button expand="block" color="primary" [routerLink]="['/specs', smartphone.id]" class="ion-margin-top">
+          DESCRIÇÃO COMPLETA
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ng-template #noResults>
+    <ion-item class="ion-text-center ion-padding">
+      <ion-label>Nenhum smartphone encontrado para os critérios selecionados.</ion-label>
+    </ion-item>
+  </ng-template>
+
+  <br>
+  <br>
+</ion-content>

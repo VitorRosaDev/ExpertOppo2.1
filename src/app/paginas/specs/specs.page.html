@@ -1,0 +1,271 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ESPECIFICAÇÕES</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="smartphone">
+  <ion-card-header>
+    <ion-card-title class="card-title">{{ smartphone.nome }}</ion-card-title>
+    <img [src]="smartphone.imagem" [alt]="'Oppo ' + smartphone.nome" class="card-title">
+    <ion-card-subtitle>
+      <strong>{{ smartphone.specs.cores }} * As imagens são apenas para referência. Consulte o produto real.</strong>
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <h2 class="card-title">Dimensões e Peso</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Altura: {{ smartphone.specs.dimensoesPeso.altura }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Largura: {{ smartphone.specs.dimensoesPeso.largura }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Espessura: {{ smartphone.specs.dimensoesPeso.espessura }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Peso: {{ smartphone.specs.dimensoesPeso.peso }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Armazenamento</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>RAM: {{ smartphone.specs.armazenamento.ram }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo de RAM: {{ smartphone.specs.armazenamento.tipoRam }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>ROM: {{ smartphone.specs.armazenamento.rom }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Especificações de ROM: {{ smartphone.specs.armazenamento.especificacoesRom }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cartão MicroSD: {{ smartphone.specs.armazenamento.microSD }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>USB OTG: {{ smartphone.specs.armazenamento.usbOtg }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Tela</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Tamanho: {{ smartphone.specs.tela.tamanho }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Proporção da Tela: {{ smartphone.specs.tela.proporcaoTela }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Resolução: {{ smartphone.specs.tela.resolucao }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Taxa de Atualização:
+          <div [innerHTML]="formatText(smartphone.specs.tela.taxaAtualizacao)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Taxa de Amostragem de Toque:
+          <div [innerHTML]="formatText(smartphone.specs.tela.taxaAmostragemToque)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Gama de Cores:
+          <div [innerHTML]="formatText(smartphone.specs.tela.gamaCores)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Profundidade de Cor: {{ smartphone.specs.tela.profundidadeCor }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Densidade de Pixels: {{ smartphone.specs.tela.densidadePixels }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Brilho:
+          <div [innerHTML]="formatText(smartphone.specs.tela.brilho)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Painel: {{ smartphone.specs.tela.painel }}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="smartphone.specs.tela.coberturaVidro">
+        <ion-label>Cobertura de Vidro: {{ smartphone.specs.tela.coberturaVidro }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Câmeras</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Traseira:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.traseira)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Frontal:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.frontal)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Modo de Disparo:
+          <br>- Traseira:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.modoDisparo.traseira)"></div>
+          <br>- Frontal:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.modoDisparo.frontal)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Vídeo:
+          <br>- Traseira:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.video.traseira)"></div>
+          <br>- Frontal:
+          <div [innerHTML]="formatText(smartphone.specs.cameras.video.frontal)"></div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Processamento</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>SoC (Processador): {{ smartphone.specs.processamento.soc }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>CPU: {{ smartphone.specs.processamento.cpu }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>GPU: {{ smartphone.specs.processamento.gpu }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Bateria</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Capacidade: {{ smartphone.specs.bateria.capacidade }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Carregamento rápido:
+          <div [innerHTML]="formatText(smartphone.specs.bateria.carregamentoRapido)"></div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+    <h2 class="card-title">Som</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Intensidade: {{ smartphone.specs.somm }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estéreo: {{smartphone.specs.estereo }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Biometria</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>Impressão Digital: {{ smartphone.specs.biometria.impressaoDigital }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Reconhecimento Facial: {{ smartphone.specs.biometria.reconhecimentoFacial }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Sensores</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item *ngFor="let sensor of smartphone.specs.sensores">
+        <ion-label>{{ sensor }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Rede Celular</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>SIM: {{ smartphone.specs.redeCelular.sim }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo de cartão SIM: {{ smartphone.specs.redeCelular.tipoCartaoSim }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Banda de Frequência:
+          <div [innerHTML]="formatText(smartphone.specs.redeCelular.bandasFrequencia)"></div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Conectividade</h2>
+  <ion-card class="custom-card">
+    <ion-list>
+      <ion-item>
+        <ion-label>WLAN:
+          <div [innerHTML]="formatText(smartphone.specs.conectividade.wlan)"></div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Versão Bluetooth®: {{ smartphone.specs.conectividade.versaoBluetooth }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Codec de Áudio Bluetooth®: {{ smartphone.specs.conectividade.codecAudioBluetooth }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Interface USB: {{ smartphone.specs.conectividade.interfaceUsb }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Sistema Operacional</h2>
+    <ion-card class="custom-card">
+      <ion-list>
+      <ion-item>
+        <ion-label>{{ smartphone.specs.sistemaOperacional }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <h2 class="card-title">Tecnologia de Localização</h2>
+    <ion-card class="custom-card">
+      <ion-list>
+      <ion-item>
+        <ion-label>GNSS: {{ smartphone.specs.tecnologiaLocalizacao.gnss }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Outros: {{ smartphone.specs.tecnologiaLocalizacao.outros }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  
+  <h2 class="card-title">Na caixa</h2>
+    <ion-card class="custom-card">
+      <ion-list>
+      <ion-item *ngFor="let naCaixa of smartphone.specs.naCaixa">
+        <ion-label>{{ naCaixa }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <br>
+  <br>
+</ion-content>

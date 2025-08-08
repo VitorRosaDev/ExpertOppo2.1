@@ -1,0 +1,14 @@
+# Cache e dependências
+.angular/
+node_modules/
+www/
+
+# Plataformas nativas do Capacitor (opcional, mas recomendado se não houver código nativo modificado)
+android/
+ios/
+
+# Configurações do ambiente de desenvolvimento
+.vscode/
+
+# Arquivos de log e temporários
+*.log

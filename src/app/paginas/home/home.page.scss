@@ -1,0 +1,47 @@
+.center-title {
+    text-align: center;
+    width: 100%;
+  }
+
+  .imagem-container {
+    margin: 16px;
+    text-align: center;
+  
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  }
+  
+  .apresentacao-texto {
+    padding: 18px;
+    text-align: justify;
+    font-size: 16px;
+  }
+
+  .custom-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+    margin: 16px;
+  }
+  
+  .card-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  .card-title-2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  
+  .card-text {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  

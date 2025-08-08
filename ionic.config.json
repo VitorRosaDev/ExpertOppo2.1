@@ -1,0 +1,7 @@
+{
+  "name": "ExpertOppo2.0",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

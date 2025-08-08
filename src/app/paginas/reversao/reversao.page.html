@@ -1,0 +1,106 @@
+<!-- src/app/paginas/reversao/reversao.page.html -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-title>REVERSÃO</ion-title>
+  </ion-toolbar>
+  <!-- Barra de busca para OPPO com sugestões preditivas -->
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="termoBuscaOppo" (ionInput)="onSearchChange($event, 'oppo')" placeholder="Buscar OPPO"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list *ngIf="termoBuscaOppo.length > 0 && sugestoesOppo.length > 0">
+    <ion-item *ngFor="let sugestao of sugestoesOppo" (click)="selecionarSugestao('oppo', sugestao.nome)">
+      <ion-label>{{ sugestao.nome }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Barra de busca para concorrente com sugestões preditivas -->
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="termoBuscaConcorrente" (ionInput)="onSearchChange($event, 'concorrente')" placeholder="Buscar concorrente"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list *ngIf="termoBuscaConcorrente.length > 0 && sugestoesConcorrente.length > 0">
+    <ion-item *ngFor="let sugestao of sugestoesConcorrente" (click)="selecionarSugestao('concorrente', sugestao.nome)">
+      <ion-label>{{ sugestao.nome }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-toolbar>
+    <ion-button expand="block" color="primary" (click)="filtrarComparativos()">Buscar</ion-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-button expand="block" color="primary" (click)="limparPesquisa()">Limpar Pesquisa</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <!-- Mensagem inicial, exibida antes da primeira busca -->
+    <ng-container *ngIf="!buscaRealizada">
+      <ion-item class="ion-text-center ion-padding">
+        <ion-label>Selecione um smartphone OPPO e um concorrente.</ion-label>
+      </ion-item>
+    </ng-container>
+
+    <!-- Tabela de comparação, exibida apenas se houver resultados -->
+    <ion-list *ngIf="comparativosFiltrados.length > 0">
+      <div *ngFor="let grupo of comparativosFiltrados">
+        <ion-item-divider color="light">
+          <ion-label>
+            <h2>{{ grupo.modelo }}</h2>
+          </ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-grid>
+            <!-- Linha com os nomes dos dispositivos -->
+            <ion-row class="ion-align-items-center ion-text-center ion-no-border">
+              <!-- Coluna de rótulo vazia para alinhamento -->
+              <ion-col size="4"></ion-col>
+              <!-- Coluna para o smartphone OPPO -->
+              <ion-col size="4" *ngIf="grupo.dispositivos[0] as smartphone">
+                <ion-label>
+                  <h3>{{ smartphone.nome }}</h3>
+                </ion-label>
+              </ion-col>
+              <!-- Coluna para o smartphone concorrente -->
+              <ion-col size="4" *ngIf="grupo.dispositivos[1] as concorrente">
+                <ion-label>
+                  <h3>{{ concorrente.nome }}</h3>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+
+            <!-- Linha com os atributos de cada dispositivo -->
+            <ion-row *ngFor="let atributo of atributos" class="ion-align-items-center ion-text-center">
+              <!-- Coluna do label do atributo, sempre visível -->
+              <ion-col size="4">
+                <ion-text color="primary">
+                  <p>{{ atributo.label }}</p>
+                </ion-text>
+              </ion-col>
+              <!-- Coluna para o smartphone OPPO -->
+              <ion-col size="4">
+                <div [innerHTML]="grupo.dispositivos[0] && grupo.dispositivos[0][atributo.key] ? grupo.dispositivos[0][atributo.key] : '-'"></div>
+              </ion-col>
+              <!-- Coluna para o smartphone concorrente -->
+              <ion-col size="4">
+                <div [innerHTML]="grupo.dispositivos[1] && grupo.dispositivos[1][atributo.key] ? grupo.dispositivos[1][atributo.key] : '-'"></div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </div>
+    </ion-list>
+    
+    <!-- Mensagem de erro, exibida quando a busca falha -->
+    <ng-container *ngIf="buscaRealizada && comparativosFiltrados.length === 0">
+      <ion-item class="ion-text-center ion-padding">
+        <ion-label>Preencha os campos corretamente e refaça sua busca.</ion-label>
+      </ion-item>
+    </ng-container>
+    <br><br>
+  </div>
+  <br>
+  <br>
+</ion-content>
